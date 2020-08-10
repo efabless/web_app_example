@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>web_app_example</title>
+</head>
+<body>
+<div>Hello World!!</div>
+<div>Seconds = <span id="value">xxx</span></div>
+<div>
+    <button id="select" class="btn btn-default" type="submit" onclick="get_function_value()">Get</button>
+</div>
+
+</body>
+
+<script>
+    function get_function_value() {
+    var data = '{}';
+
+    $.ajax({
+            url: "{{ url_for('do_some_function') }}",
+            type: "POST",
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function( data ) {       
+                console.log(data); 
+                $("#value").text(data);
+            },
+            error: function(){
+                console.log('error from do_some_function');
+            }
+       });
+    }
+
+</script>
+</html>
